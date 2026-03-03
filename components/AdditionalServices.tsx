@@ -23,7 +23,7 @@ const AdditionalServices: React.FC = () => {
         </div>
 
         {/* Photography Section */}
-        <div className="flex flex-col lg:flex-row items-center gap-16 mb-32">
+        <div id="ai-photography" className="flex flex-col lg:flex-row items-center gap-16 mb-32 scroll-mt-32">
           <motion.div 
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -93,7 +93,7 @@ const AdditionalServices: React.FC = () => {
         </div>
 
         {/* Web Design Section */}
-        <div className="flex flex-col lg:flex-row-reverse items-center gap-16 mb-32">
+        <div id="web-design" className="flex flex-col lg:flex-row-reverse items-center gap-16 mb-32 scroll-mt-32">
           <motion.div 
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -158,7 +158,7 @@ const AdditionalServices: React.FC = () => {
         </div>
 
         {/* App Development Section */}
-        <div className="flex flex-col lg:flex-row items-center gap-16">
+        <div id="app-development" className="flex flex-col lg:flex-row items-center gap-16 scroll-mt-32">
           <motion.div 
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}

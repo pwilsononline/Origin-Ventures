@@ -65,7 +65,7 @@ const Hero: React.FC = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-lg md:text-xl text-slate-400 mb-10 max-w-2xl leading-relaxed"
         >
-          Origin Ventures merges sophisticated AI systems with battle-tested digital marketing strategies to turn local businesses into market leaders.
+          Origin Ventures merges sophisticated AI systems with battle-tested digital marketing strategies to turn local businesses, ecommerce brands, online coaches, and digital entrepreneurs into market leaders.
         </motion.p>
 
         {/* CTAs */}

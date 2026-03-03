@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Command } from 'lucide-react';
+import { Menu, X, Command, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Button from './ui/Button';
 
@@ -16,7 +16,16 @@ const Navbar: React.FC = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Services', href: '#services' },
+    { 
+      name: 'Services', 
+      href: '#services',
+      dropdown: [
+        { name: 'Core Services', href: '#services' },
+        { name: 'AI Photography', href: '#ai-photography' },
+        { name: 'Web & Graphic Design', href: '#web-design' },
+        { name: 'Mobile & Web Apps', href: '#app-development' },
+      ]
+    },
     { name: 'System', href: '#features' },
     { name: 'Industries', href: '#stats' },
     { name: 'Contact', href: '#contact' },
@@ -44,14 +53,32 @@ const Navbar: React.FC = () => {
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className="text-sm font-medium text-slate-400 hover:text-cyan-400 transition-colors relative group"
-            >
-              {link.name}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-400 transition-all duration-300 group-hover:w-full" />
-            </a>
+            <div key={link.name} className="relative group">
+              <a
+                href={link.href}
+                className="text-sm font-medium text-slate-400 hover:text-cyan-400 transition-colors flex items-center gap-1"
+              >
+                {link.name}
+                {link.dropdown && <ChevronDown className="w-4 h-4 opacity-50 group-hover:opacity-100 transition-opacity" />}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-400 transition-all duration-300 group-hover:w-full" />
+              </a>
+              
+              {link.dropdown && (
+                <div className="absolute top-full left-0 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                  <div className="bg-slate-900 border border-white/10 rounded-xl shadow-xl w-56 overflow-hidden flex flex-col">
+                    {link.dropdown.map((item) => (
+                      <a
+                        key={item.name}
+                        href={item.href}
+                        className="px-4 py-3 text-sm text-slate-300 hover:bg-white/5 hover:text-cyan-400 transition-colors border-b border-white/5 last:border-0"
+                      >
+                        {item.name}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
           ))}
         </div>
 
@@ -75,16 +102,31 @@ const Navbar: React.FC = () => {
           >
             <div className="flex flex-col p-6 gap-4">
               {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className="text-lg font-medium text-slate-300 hover:text-cyan-400"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {link.name}
-                </a>
+                <div key={link.name} className="flex flex-col gap-2">
+                  <a
+                    href={link.href}
+                    className="text-lg font-medium text-slate-300 hover:text-cyan-400"
+                    onClick={() => !link.dropdown && setIsOpen(false)}
+                  >
+                    {link.name}
+                  </a>
+                  {link.dropdown && (
+                    <div className="flex flex-col pl-4 gap-2 border-l border-white/10 ml-2">
+                      {link.dropdown.map((item) => (
+                        <a
+                          key={item.name}
+                          href={item.href}
+                          className="text-base text-slate-400 hover:text-cyan-400 py-1"
+                          onClick={() => setIsOpen(false)}
+                        >
+                          {item.name}
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </div>
               ))}
-              <Button variant="primary" className="w-full justify-center">
+              <Button variant="primary" className="w-full justify-center mt-2">
                 Get Started
               </Button>
             </div>
